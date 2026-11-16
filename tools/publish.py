@@ -57,12 +57,23 @@ def main():
     t = t.replace(STAMP, "st.title='Data: Inside Airbnb (insideairbnb.com), licensed CC BY 4.0. Nights booked are its "
                          "estimates from reviews, not bookings. Every source is listed under Method, Sources and credits.';"
                          f"st.innerHTML='<i>data</i><b>Inside Airbnb {asof.group(1)}, CC BY 4.0</b>';")
-    t, n = re.subn(r'(<div class="gx-top-r">)', r'\1<a class="ra-stamp" href="@@PORTFOLIO@@" style="min-height:44px;'
-                   r'text-decoration:none" aria-label="Back to the portfolio"><b>Portfolio</b></a>', t, count=1)
+    # the way back to the portfolio: a home mark and the word; under 1200 px wide the mark alone (its name is its label)
+    t, n = re.subn(r'(<div class="gx-top-r">)', r'\1<a class="ra-stamp ra-pf" href="@@PORTFOLIO@@" '
+                   r'title="Back to the portfolio" aria-label="Back to the portfolio"><svg viewBox="0 0 24 24" fill="none" '
+                   r'stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" '
+                   r'aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5.5 9.5V21h13V9.5"/><path d="M10 21v-6h4v6"/></svg>'
+                   r'<b>Portfolio</b></a>', t, count=1)
     if n != 1:
         raise SystemExit("no title bar found: the Portfolio link could not be placed")
-    t = t.replace("</head>", "<style>@media (max-width:1799px){.gx .gx-top-r .gx-asof{display:none}}"
-                             "@media (max-width:1499px){.gx-top-r .ra-stamp i{display:none}}</style></head>", 1)
+    t = t.replace("</head>", "<style>.ra-pf{min-height:44px;text-decoration:none;gap:7px;color:inherit}"
+                             ".ra-pf svg{width:18px;height:18px;flex:none}"
+                             "body.ra-compact .ra-pf{min-height:0;height:var(--ch);padding:0 12px}"
+                             "@media (max-width:1499px){.gx-top-r span.ra-stamp{display:none !important}}"
+                             "@media (min-width:641px) and (max-width:1199px){.ra-pf b{display:none}"
+                             "body.ra-compact .ra-pf{width:var(--ch);padding:0;justify-content:center}"
+                             ".gx-top-r .gx-asof .k{display:none}}"
+                             "@media (max-width:640px){.ra-pf b{display:none}.ra-pf{min-height:0;height:38px;width:38px;"
+                             "padding:0;justify-content:center;display:inline-flex !important}}</style></head>", 1)
 
     ASSETS.mkdir(parents=True, exist_ok=True)
     for old in ASSETS.glob("*"):

@@ -1,4 +1,4 @@
-# Rentals Archetypes
+# BnB Scope
 
 Types, monikers and badges for short-term rental listings, hosts and markets: 1,705,895 listings in 124 markets
 across 37 countries, from Inside Airbnb's public snapshots.
@@ -9,6 +9,9 @@ across 37 countries, from Inside Airbnb's public snapshots.
 
 - **Types by machine learning.** Listings, hosts and markets are each clustered on what they do (price, nights
   booked, reviews, size, how the host operates) and each type is named and given a crest.
+- **Type chips that turn over.** Each type is a cut stone on a chip; its back lists the five markets, countries or
+  climate belts where it ranks highest by nights, price, rating or share (z by rank; a place needs 30 of the type's
+  listings).
 - **A map at every level.** The world, regions found by clustering the markets and cut by climate belt, one market's
   own listings. Any measure can be drawn as dots, as squares or as a surface over the land's real relief.
 - **Where a listing stands.** Climate belt and hemisphere, climate group, elevation, distance to a shore (ocean or
